@@ -298,8 +298,8 @@ def run(
     folder = (workspace or WORKSPACE) / "runs" / run_id
     folder.mkdir(parents=True, exist_ok=True)
     db = folder / "evidence.db"
-    if db.exists():
-        db.unlink()
+    for stale in (db, *(db.with_name(db.name + s) for s in ("-journal", "-wal", "-shm"))):
+        stale.unlink(missing_ok=True)  # a leftover journal from an interrupted run would corrupt the new file
     from bfa.store import Store
 
     store = Store(db)

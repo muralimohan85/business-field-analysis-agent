@@ -51,12 +51,21 @@ PAGES = [
     "Export",
     "Agent settings",
 ]
-WS = Path(tempfile.gettempdir()) / "bfa-app"
+BASE_WS = Path(tempfile.gettempdir()) / "bfa-app"
 
 
 # ====================================================================== state
 def ss():
     return st.session_state
+
+
+def ws() -> Path:
+    """This browser session's own workspace: concurrent visitors must not share one evidence file."""
+    if "ws" not in ss():
+        import uuid
+
+        ss().ws = BASE_WS / uuid.uuid4().hex[:12]
+    return ss().ws
 
 
 def init() -> None:
@@ -115,7 +124,7 @@ def run_analysis(plan=None, demo=False) -> None:
                 auto_approve=demo or plan is not None,
                 client=client(),
                 today=DEMO_DATE if demo else None,
-                workspace=WS,
+                workspace=ws(),
                 on_step=on_step,
             )
         except PermissionError as exc:
@@ -271,9 +280,9 @@ def page_new() -> None:
         }
         ups = [u for u in ss().uploads if keep_demo and u[2]]
         if files:
-            WS.mkdir(parents=True, exist_ok=True)
+            ws().mkdir(parents=True, exist_ok=True)
             for f in files:
-                p = WS / "uploads" / f.name
+                p = ws() / "uploads" / f.name
                 p.parent.mkdir(parents=True, exist_ok=True)
                 p.write_bytes(f.getvalue())
                 ups.append((str(p), basis, False))
@@ -796,7 +805,7 @@ def page_export() -> None:
         if not st.checkbox("I have reviewed this report (the profile asks for review before export)"):
             return
     if st.button("Create files", type="primary"):
-        out = WS / "exports" / r.report.run_id
+        out = ws() / "exports" / r.report.run_id
         made = []
         try:
             for f in fmts:

@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS facts (
   geography TEXT, topics TEXT, basis TEXT, tier TEXT, kind TEXT, as_of TEXT, location TEXT, direction TEXT,
   in_scope INTEGER, scope_note TEXT, inputs TEXT
 );
-CREATE VIRTUAL TABLE IF NOT EXISTS facts_fts USING fts5(id UNINDEXED, claim, entity, topics);
 CREATE TABLE IF NOT EXISTS blocked (
   id INTEGER PRIMARY KEY AUTOINCREMENT, connector TEXT, text TEXT, question_id TEXT, reason TEXT, at TEXT
 );
@@ -61,9 +60,16 @@ class Store:
         if str(path) != ":memory:":
             Path(path).parent.mkdir(parents=True, exist_ok=True)
         self.path = str(path)
-        self.db = sqlite3.connect(self.path, check_same_thread=False)
+        self.db = sqlite3.connect(self.path, check_same_thread=False, timeout=30)
         self.db.row_factory = sqlite3.Row
         self.db.executescript(SCHEMA)
+        try:  # full-text search where this SQLite build has FTS5; plain LIKE search otherwise
+            self.db.execute(
+                "CREATE VIRTUAL TABLE IF NOT EXISTS facts_fts USING fts5(id UNINDEXED, claim, entity, topics)"
+            )
+            self.fts = True
+        except sqlite3.OperationalError:
+            self.fts = False
 
     # ------------------------------------------------------------------ sources
     def add_source(self, s: Source) -> None:
@@ -122,8 +128,9 @@ class Store:
             f"INSERT OR REPLACE INTO facts VALUES ({','.join('?' * len(_FACT_COLS))})",
             tuple(row[c] for c in _FACT_COLS),
         )
-        self.db.execute("DELETE FROM facts_fts WHERE id=?", (f.id,))
-        self.db.execute("INSERT INTO facts_fts VALUES (?,?,?,?)", (f.id, f.claim, f.entity, " ".join(f.topics)))
+        if self.fts:
+            self.db.execute("DELETE FROM facts_fts WHERE id=?", (f.id,))
+            self.db.execute("INSERT INTO facts_fts VALUES (?,?,?,?)", (f.id, f.claim, f.entity, " ".join(f.topics)))
         self.db.commit()
         return f.id
 
@@ -157,10 +164,16 @@ class Store:
         terms = [t for t in "".join(c if c.isalnum() else " " for c in query).split() if len(t) > 2]
         if not terms:
             return []
-        match = " OR ".join(f'"{t}"' for t in terms)
-        rows = self.db.execute(
-            "SELECT id FROM facts_fts WHERE facts_fts MATCH ? ORDER BY rank LIMIT ?", (match, limit * 3)
-        ).fetchall()
+        if self.fts:
+            match = " OR ".join(f'"{t}"' for t in terms)
+            rows = self.db.execute(
+                "SELECT id FROM facts_fts WHERE facts_fts MATCH ? ORDER BY rank LIMIT ?", (match, limit * 3)
+            ).fetchall()
+        else:
+            where = " OR ".join("claim LIKE ?" for _ in terms)
+            rows = self.db.execute(
+                f"SELECT id FROM facts WHERE {where} LIMIT ?", (*[f"%{t}%" for t in terms], limit * 3)
+            ).fetchall()
         out = []
         for r in rows:
             f = self.fact(r["id"])

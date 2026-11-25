@@ -87,3 +87,30 @@ def test_secondary_needs_approval_and_policy(demo_run):
     )
     with pytest.raises(PermissionError):
         run_secondary(demo_run.__class__(**{**demo_run.__dict__, "cfg": strict}), SecondaryRequest(), approve=True)
+
+
+def test_concurrent_runs_in_separate_workspaces(brief, cfg, tmp_path):
+    """The app gives each browser session its own workspace; parallel runs must not interfere."""
+    import threading
+
+    errors = []
+
+    def go(i):
+        try:
+            run(brief, cfg, auto_approve=True, today=TODAY, workspace=tmp_path / f"session{i}")
+        except Exception as exc:  # pragma: no cover - the assertion below reports it
+            errors.append(repr(exc))
+
+    threads = [threading.Thread(target=go, args=(i,)) for i in range(3)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    assert not errors
+
+
+def test_stale_journal_from_an_interrupted_run_is_cleared(brief, cfg, tmp_path):
+    first = run(brief, cfg, auto_approve=True, today=TODAY, workspace=tmp_path)
+    (first.folder / "evidence.db-journal").write_bytes(b"left over from an interrupted run")
+    again = run(brief, cfg, auto_approve=True, today=TODAY, workspace=tmp_path)
+    assert all(c.passed for c in again.report.checks)
