@@ -25,7 +25,7 @@ Press releases are secondary by default (`press_releases_primary: false`). They 
 |---|---|
 | The research wanders off the field | Scope lock after approval: a fact must mention a scope term, a targeted query, or be your own data; excluded terms, out-of-brief geographies and old facts are set aside with the reason |
 | The agent searches for things nobody asked | Query gate: every query names a plan question, uses a connector planned for it, and shares the plan's vocabulary |
-| A model change shifts the output | Models pinned in settings; temperature 0 for planning; the manifest records models and prompt version |
+| A model change shifts the output | Models pinned in settings; the manifest records models and prompt version; record and replay repeats a Claude run exactly (Opus 5.5 takes no temperature setting) |
 | The same brief gives different evidence | Record and replay: every response is saved by request hash; `replay_test` compares the evidence hash and the statements |
 | Spend runs away | Caps per call type and run time; skipped calls are listed |
 | A source tries to steer the model | The sanitiser quarantines instruction-like sentences before extraction; the critic rejects statements that read like instructions |

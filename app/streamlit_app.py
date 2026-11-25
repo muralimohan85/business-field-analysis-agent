@@ -129,7 +129,7 @@ def run_analysis(plan=None, demo=False) -> None:
 
         def on_step(step, msg):
             steps.append(msg)
-            if step in ("plan", "done") or len(steps) % 5 == 0:
+            if step in ("plan", "write", "done") or len(steps) % 5 == 0:
                 st.write(f"{step}: {msg}")
 
         try:
@@ -149,6 +149,10 @@ def run_analysis(plan=None, demo=False) -> None:
             )
         except PermissionError as exc:
             status.update(label=str(exc), state="error")
+            return
+        except Exception as exc:  # show the reason instead of a redacted crash page
+            status.update(label="The run stopped", state="error")
+            st.error(f"The run stopped: {type(exc).__name__}: {exc}")
             return
         status.update(
             label=f"Done: {len(r.report.all_statements())} statements, "
@@ -395,6 +399,8 @@ def header(r) -> None:
     if rep.fictional or any(s.fictional for s in r.store.sources()):
         chips += pill("Includes fictional sample uploads", T["up_bg"], T["up"])
     md(chips)
+    for note in r.manifest.notes:
+        st.warning(note)
     k = st.columns(5)
     k[0].markdown(kpi("Verdict", rep.verdict, "from scored opportunities and findings"), unsafe_allow_html=True)
     k[1].markdown(
@@ -915,7 +921,10 @@ def page_settings() -> None:
         a, b, d = st.columns(3)
         planner = a.text_input("Planner", c.models.planner)
         writer = b.text_input("Writer", c.models.writer)
-        temp = d.number_input("Writer temperature", 0.0, 1.0, float(c.models.temperature_write), 0.1)
+        researcher = d.text_input("Web search (researcher)", c.models.researcher)
+        st.caption(
+            "No temperature setting: Claude Opus 5.5 fixes sampling. Runs repeat exactly through record and replay."
+        )
         saved = st.form_submit_button("Apply settings", type="primary")
     if saved:
         ss().overrides = {
@@ -935,7 +944,7 @@ def page_settings() -> None:
                 "official_domains": [x.strip() for x in domains.splitlines() if x.strip()],
             },
             "checks": list(LOCKED_CHECKS) + chk,
-            "models": {"planner": planner, "writer": writer, "temperature_write": float(temp)},
+            "models": {"planner": planner, "writer": writer, "researcher": researcher},
         }
         ss().plan = None
         st.success("Applied. New runs use these settings; the run manifest records them.")

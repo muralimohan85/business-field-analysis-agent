@@ -46,6 +46,7 @@ class Run:
     cfg: AgentConfig
     removed: list = field(default_factory=list)
     skipped: list = field(default_factory=list)
+    notes: list = field(default_factory=list)
 
     @property
     def blocked_export(self) -> list:
@@ -279,15 +280,21 @@ def run(
     http = Http(mode=mode, snapshot=snapshot)
     budget = Budget(cfg.limits)
     caller = None
+    notes: list[str] = []
     # 1 plan
     plan = plan or build_plan(brief, cfg, today)
     if engine == "claude" and not plan.approved:
-        from bfa.engines.claude import ClaudeCaller, ClaudePlanner, merge_proposal
+        from bfa.engines.claude import ClaudeCaller, ClaudePlanner, ClaudeUnavailable, merge_proposal
 
         caller = ClaudeCaller(http, client, budget, slot="claude_planner")
         try:
             plan = merge_proposal(plan, ClaudePlanner(cfg, caller).propose(brief, plan))
-        except (SnapshotMissing, RuntimeError) as exc:
+        except ClaudeUnavailable as exc:
+            notes.append(
+                f"Claude planner not used: {str(exc).rstrip('.')}. The plan comes from the brief and the domain pack."
+            )
+            on_step("plan", notes[-1])
+        except SnapshotMissing as exc:
             on_step("plan", f"Claude planner skipped: {exc}")
     if not plan.approved:
         if cfg.approvals.plan and not auto_approve:
@@ -333,6 +340,12 @@ def run(
         today=today,
         fictional=fictional,
     )
+    if writer is not None and writer.error:
+        notes.append(
+            f"Claude writer not used: {writer.error.rstrip('.')}. "
+            "Every section keeps its deterministic text, under the same checks."
+        )
+        on_step("write", notes[-1])
     checks = run_checks(
         report, store, cfg, critic, budget.as_dict(), blocked=len(gate.blocked), set_aside=store.counts()["set_aside"]
     )
@@ -361,6 +374,7 @@ def run(
         budget=budget.as_dict(),
         fact_hash=evidence_hash,
         fictional=fictional,
+        notes=notes,
     )
     save(folder, report, manifest, plan, cfg, log)
     on_step(
@@ -377,6 +391,7 @@ def run(
         cfg=cfg,
         removed=critic.removed,
         skipped=log["skipped"],
+        notes=notes,
     )
 
 

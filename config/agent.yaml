@@ -37,7 +37,7 @@ models:
   researcher: claude-sonnet-5-5   # runs the web search connectors
   writer: claude-opus-5-5         # rewrites statements within the cited facts
   pinned: true
-  temperature_write: 0.2
+  temperature_write: null         # leave unset: Claude Opus 5.5 rejects sampling parameters
   prices_per_mtok: {}            # e.g. {claude-opus-5-5: {input: 0, output: 0}} to see token cost; search fees are always shown
 
 approvals:

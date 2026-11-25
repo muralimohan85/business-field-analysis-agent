@@ -225,6 +225,7 @@ class RunManifest(BaseModel):
     checks: list[CheckResult] = Field(default_factory=list)
     budget: dict = Field(default_factory=dict)
     fact_hash: str = ""  # replay test compares this
+    notes: list[str] = Field(default_factory=list)  # e.g. why the Claude engine fell back to deterministic text
     fictional: bool = False
 
 

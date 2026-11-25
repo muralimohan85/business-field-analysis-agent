@@ -88,17 +88,12 @@ class ClaudeWeb(Connector):
         if allowed:
             search["allowed_domains"] = allowed
             fetch["allowed_domains"] = allowed
-        resp = client.messages.create(
-            model=self.model,
-            max_tokens=2000,
-            system=(
-                "You collect evidence. Answer only with sentences quoted from the pages you find, each with its "
-                "citation. Do not add facts, estimates or opinions of your own. If the pages do not answer, say "
-                "'No source found.'"
-            ),
-            tools=[search, fetch],
-            messages=[{"role": "user", "content": f"Find quoted evidence for: {question}"}],
-        )
+        try:
+            resp = self._create(client, search, fetch, question)
+        except Exception as exc:
+            from bfa.engines.claude import _api_message
+
+            raise ConnectorError(f"Claude web search: {_api_message(exc)}") from exc
         body = resp.model_dump() if hasattr(resp, "model_dump") else resp
         if self.http.mode == "record":
             import json
@@ -110,6 +105,19 @@ class ClaudeWeb(Connector):
                 )
             )
         return body
+
+    def _create(self, client, search: dict, fetch: dict, question: str):
+        return client.messages.create(
+            model=self.model,
+            max_tokens=8000,  # server tools plus adaptive thinking need room
+            system=(
+                "You collect evidence. Answer only with sentences quoted from the pages you find, each with its "
+                "citation. Do not add facts, estimates or opinions of your own. If the pages do not answer, say "
+                "'No source found.'"
+            ),
+            tools=[search, fetch],
+            messages=[{"role": "user", "content": f"Find quoted evidence for: {question}"}],
+        )
 
     def run(self, q: ConnectorQuery) -> Result:
         primary_only = q.params.get("primary", True)

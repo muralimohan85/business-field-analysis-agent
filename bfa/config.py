@@ -57,7 +57,7 @@ class ModelsCfg(BaseModel):
     researcher: str = "claude-sonnet-5-5"
     writer: str = "claude-opus-5-5"
     pinned: bool = True
-    temperature_write: float = 0.2
+    temperature_write: float | None = None  # leave unset: Claude Opus 5.5 rejects sampling parameters
     prices_per_mtok: dict[str, dict[str, float]] = Field(default_factory=dict)  # fill in to see token cost
 
 

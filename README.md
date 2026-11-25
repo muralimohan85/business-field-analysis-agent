@@ -23,7 +23,7 @@ No API key or network needed: the demo replays recorded data.
 pip install -r requirements.txt
 make app        # Streamlit app, opens on the demo report
 make demo       # same analysis from the command line; writes every export to examples/digital-pathology/
-make test       # 65 tests
+make test       # 67 tests
 make eval       # governance evaluation (seeded faults, drift, replay)
 ```
 
@@ -61,7 +61,7 @@ they leave. Run `make record` on a machine with network access to record a full 
 | Export the summary as Word, slides or PDF | [`bfa/report/export.py`](bfa/report/export.py): Word, PowerPoint, PDF, Markdown and an Excel evidence pack, in four scopes (one page, decision brief, full, custom). Every format uses the same source numbers. |
 | Fact-based, from the primary search only | The report is built from primary sources only. Secondary sources (news, press releases, research firms, the wider web) come in only through an optional secondary search. |
 | Optional secondary search | You choose which open questions, sections or questions of your own it serves, and approve it as a plan amendment. Results are labelled secondary, and a switch rebuilds the report with or without them. |
-| Governed so it does not drift | The scope locks when you approve the plan. A [query gate](bfa/governance/gate.py) blocks searches that serve no planned question. Models are pinned, with temperature 0 for planning. Every run saves a manifest, and a [replay test](bfa/pipeline.py) compares evidence hashes. |
+| Governed so it does not drift | The scope locks when you approve the plan. A [query gate](bfa/governance/gate.py) blocks searches that serve no planned question. Models are pinned. Every run saves a manifest, and a [replay test](bfa/pipeline.py) compares evidence hashes. |
 | Configure the agent | [Profiles](config/profiles/) (`strict-fact-based`, `exploratory`, `regulated-health`) and an *Agent settings* screen: evidence policy, thresholds, age limits, scope behaviour, spend caps, approvals, connectors, official domains, checks, models. Three settings are locked in every profile. |
 
 ## How it works
@@ -157,9 +157,9 @@ python -m bfa sources                                          # connectors and 
 Without a key, the deterministic engine writes every statement from templates over the facts, and it runs offline. With
 `ANTHROPIC_API_KEY` set (or a key pasted in the app's sidebar):
 
-* **Planner** (`claude-opus-5-5`, temperature 0) proposes search vocabulary only (keywords, scope and exclude terms,
+* **Planner** (`claude-opus-5-5`) proposes search vocabulary only (keywords, scope and exclude terms,
   segments, stages). You see the result in the plan before you approve it.
-* **Writer** (`claude-opus-5-5`, temperature 0.2) rewrites each section through a tool with a fixed schema. It
+* **Writer** (`claude-opus-5-5`) rewrites each section through a tool with a strict schema. It
   receives only the facts the block already cites and must cite from that list. The same critic then checks each
   statement, and a block whose rewrite fails keeps its deterministic text. A bad answer can only make a block plainer,
   not wrong.
@@ -168,7 +168,10 @@ Without a key, the deterministic engine writes every statement from templates ov
   use the wider web, and its results are labelled.
 
 Every Claude call is recorded and replayed like a connector call, so a Claude run can be repeated exactly. The models
-are pinned in [`config/agent.yaml`](config/agent.yaml).
+are pinned in [`config/agent.yaml`](config/agent.yaml). Claude Opus 5.5 rejects forced tool choice and sampling
+parameters, so calls use `tool_choice: auto` with strict tool schemas and send no temperature. If the API refuses a
+call (a wrong key, no credit, a rejected parameter), the run carries on: each section keeps its deterministic text and
+the report shows why.
 
 ## Recording real data
 
@@ -238,7 +241,7 @@ config/                 agent.yaml, profiles/, frameworks.yaml, rules.yaml, sour
 data/                   demo brief, sample uploads, recorded snapshots
 evaluation/             seeded-fault, drift and replay evaluation
 examples/               the demo's exported outputs
-tests/                  65 tests (pipeline, checks, governance, connectors, exports, Claude engine, app)
+tests/                  67 tests (pipeline, checks, governance, connectors, exports, Claude engine, app)
 ```
 
 ## License
