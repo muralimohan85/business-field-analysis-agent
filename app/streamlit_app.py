@@ -59,6 +59,26 @@ def ss():
     return st.session_state
 
 
+def go(page: str) -> None:
+    """Move to another page from a button. Applied before the sidebar radio is drawn on the next run."""
+    ss().goto = page
+    st.rerun()
+
+
+def set_secondary(on: bool) -> None:
+    """Switch the secondary evidence view. Call it before the toggle is drawn in this run."""
+    ss().show_secondary = on
+    ss().sec_toggle = on
+
+
+def secondary_toggle(label: str) -> None:
+    # A keyed widget keeps its identity across reruns; an unkeyed one whose default changes loses every other click.
+    if "sec_toggle" not in ss():
+        ss().sec_toggle = ss().show_secondary
+    st.toggle(label, key="sec_toggle", help="Rebuilds the report with or without the secondary search results.")
+    ss().show_secondary = ss().sec_toggle
+
+
 def ws() -> Path:
     """This browser session's own workspace: concurrent visitors must not share one evidence file."""
     if "ws" not in ss():
@@ -78,7 +98,7 @@ def init() -> None:
         ss().run = None
         ss().run_sec = None
         ss().show_secondary = False
-        ss().page = "Report"
+        ss().nav = "Report"
         ss().demo = True
 
 
@@ -135,11 +155,12 @@ def run_analysis(plan=None, demo=False) -> None:
             f"{sum(c.passed for c in r.report.checks)}/{len(r.report.checks)} checks passed",
             state="complete",
         )
-    ss().run, ss().run_sec, ss().show_secondary = r, None, False
+    ss().run, ss().run_sec = r, None
+    set_secondary(False)
 
 
 def current():
-    if ss().show_secondary and ss().run_sec is not None:
+    if ss().get("sec_toggle", ss().show_secondary) and ss().run_sec is not None:
         return ss().run_sec
     return ss().run
 
@@ -170,7 +191,9 @@ def sidebar() -> None:
             "<h2 style='color:#fff;margin:0 0 4px 0'>BFA agent</h2>"
             "<div style='font-size:12.5px;margin-bottom:14px'>Business field analysis, fact-based</div>"
         )
-        ss().page = st.radio("Go to", PAGES, index=PAGES.index(ss().page), label_visibility="collapsed")
+        if ss().get("goto"):
+            ss().nav = ss().pop("goto")
+        st.radio("Go to", PAGES, key="nav", label_visibility="collapsed")
         st.divider()
         st.caption("Engine")
         st.text_input(
@@ -202,7 +225,7 @@ def page_new() -> None:
         "shown as a gap, never filled in.</p>"
     )
     b = ss().brief
-    with st.form("brief"):
+    with st.form("brief_form"):
         md("<div class='bfa-lbl'>1 · The field</div>")
         field = st.text_area("Field, in plain words", b.get("field", ""), height=70)
         c1, c2, c3 = st.columns(3)
@@ -289,8 +312,7 @@ def page_new() -> None:
         ss().uploads = ups
         ss().plan = build_plan(Brief(**ss().brief), cfg())
         ss().demo = False
-        ss().page = "Plan and run"
-        st.rerun()
+        go("Plan and run")
     if ss().uploads:
         md("<div class='bfa-lbl'>Uploads in this analysis</div>")
         for p, bs, sample in ss().uploads:
@@ -357,8 +379,7 @@ def page_plan() -> None:
     ok = st.checkbox("I approve this plan. Lock the scope and run.", value=False)
     if st.button("Run the analysis", type="primary", disabled=not ok):
         run_analysis(approve(plan.model_copy(deep=True)))
-        ss().page = "Report"
-        st.rerun()
+        go("Report")
 
 
 def header(r) -> None:
@@ -410,14 +431,10 @@ def page_report() -> None:
     if not ensure_run():
         st.info("Run an analysis first.")
         return
+    if ss().run_sec is not None:
+        secondary_toggle("Include secondary evidence")
     r = current()
     header(r)
-    if ss().run_sec is not None:
-        ss().show_secondary = st.toggle(
-            "Include secondary evidence",
-            value=ss().show_secondary,
-            help="Rebuilds the report with or without the secondary search results.",
-        )
     doc = doc_for(r)
     lookup = {x.n: x for x in doc.refs}
     left, right = st.columns([3, 1])
@@ -697,7 +714,7 @@ def page_secondary() -> None:
             )
         )
         return
-    with st.form("sec"):
+    with st.form("secondary_form"):
         gaps = st.multiselect(
             "Open questions to work on", base.report.open_questions, default=base.report.open_questions[:3]
         )
@@ -735,7 +752,7 @@ def page_secondary() -> None:
                 ss().run_sec = run_secondary(
                     base, req, mode="live" if ss().get("live") else "replay", client=client(), approve=True
                 )
-            ss().show_secondary = True
+            set_secondary(True)
     if ss().run_sec is not None:
         s = ss().run_sec
         before, after = base.store.counts(), s.store.counts()
@@ -748,7 +765,7 @@ def page_secondary() -> None:
                 + ("…" if len(s.skipped) > 3 else ""),
             )
         )
-        ss().show_secondary = st.toggle("Include secondary evidence in the report", value=ss().show_secondary)
+        secondary_toggle("Include secondary evidence in the report")
         st.caption(
             f"Primary report: {len(base.report.all_statements())} statements · with secondary: "
             f"{len(s.report.all_statements())} statements · before: {before['facts']} facts"
@@ -837,9 +854,12 @@ def page_settings() -> None:
         "manifest.</p>"
     )
     names = profiles()
-    ss().profile = st.selectbox("Profile", names, index=names.index(ss().profile))
+    if "profile_pick" not in ss():
+        ss().profile_pick = ss().profile
+    st.selectbox("Profile", names, key="profile_pick")
+    ss().profile = ss().profile_pick
     c = load_config(ss().profile, ss().overrides)
-    with st.form("settings"):
+    with st.form("settings_form"):
         md("<div class='bfa-lbl'>Evidence</div>")
         a, b, d = st.columns(3)
         pol = ["primary_only", "primary_then_secondary_on_request", "primary_then_secondary_for_gaps"]
@@ -937,7 +957,7 @@ sidebar()
     "Secondary search": page_secondary,
     "Export": page_export,
     "Agent settings": page_settings,
-}[ss().page]()
+}[ss().nav]()
 md(
     "<p class='src' style='margin-top:24px'>Demo data: openFDA records recorded on 25 Nov 2026 (real) and two "
     "fictional "

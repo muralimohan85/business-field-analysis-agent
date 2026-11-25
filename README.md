@@ -23,7 +23,7 @@ No API key or network needed: the demo replays recorded data.
 pip install -r requirements.txt
 make app        # Streamlit app, opens on the demo report
 make demo       # same analysis from the command line; writes every export to examples/digital-pathology/
-make test       # 57 tests
+make test       # 65 tests
 make eval       # governance evaluation (seeded faults, drift, replay)
 ```
 
@@ -238,7 +238,7 @@ config/                 agent.yaml, profiles/, frameworks.yaml, rules.yaml, sour
 data/                   demo brief, sample uploads, recorded snapshots
 evaluation/             seeded-fault, drift and replay evaluation
 examples/               the demo's exported outputs
-tests/                  57 tests
+tests/                  65 tests (pipeline, checks, governance, connectors, exports, Claude engine, app)
 ```
 
 ## License
