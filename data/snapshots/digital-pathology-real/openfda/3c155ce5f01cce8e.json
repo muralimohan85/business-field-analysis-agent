@@ -1,0 +1,83 @@
+{
+ "url": "https://api.fda.gov/device/classification.json?search=product_code%3AQKQ&limit=100",
+ "fetched": "2026-11-25T07:20:34+00:00",
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 1
+   }
+  },
+  "results": [
+   {
+    "third_party_flag": "N",
+    "life_sustain_support_flag": "N",
+    "gmp_exempt_flag": "N",
+    "summary_malfunction_reporting": "Ineligible",
+    "product_code": "QKQ",
+    "openfda": {
+     "k_number": [
+      "K250414",
+      "K212361",
+      "K243391",
+      "K210811",
+      "K201005",
+      "K243449",
+      "K193054",
+      "K250968",
+      "K261380",
+      "K252762",
+      "K240303",
+      "K233126",
+      "K242244",
+      "K241273"
+     ],
+     "registration_number": [
+      "3003584784",
+      "3017125738",
+      "3031081536",
+      "3008491142",
+      "3025774973",
+      "3006791373",
+      "3039404341",
+      "3003989064",
+      "9615992",
+      "3026040791",
+      "3039498387",
+      "3020687180"
+     ],
+     "fei_number": [
+      "3003584784",
+      "3017125738",
+      "3031081536",
+      "3008491142",
+      "3025774973",
+      "3006791373",
+      "3039404341",
+      "3003989064",
+      "3026040791",
+      "3039498387",
+      "3020687180",
+      "3001104292"
+     ]
+    },
+    "review_panel": "PA",
+    "medical_specialty": "PA",
+    "device_name": "Digital Pathology Image Viewing And Management Software",
+    "review_code": "",
+    "unclassified_reason": "",
+    "medical_specialty_description": "Pathology",
+    "device_class": "2",
+    "definition": "Digital pathology image viewing and management software device is a software intended for viewing and management of digital images of scanned surgical pathology slides prepared from formalin-fixed paraffin embedded (FFPE) tissue. It is an aid to the pathologist to review and interpret these digital images for the purposes of primary diagnosis.",
+    "regulation_number": "864.3700",
+    "implant_flag": "N",
+    "submission_type_id": "1"
+   }
+  ]
+ }
+}

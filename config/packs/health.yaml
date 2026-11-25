@@ -1,0 +1,66 @@
+# Health domain pack. A topic gives the planner the codes each database needs, plus the
+# segments, value-chain stages and candidate opportunities to organise evidence around.
+# Codes here are inputs to searches, not facts: nothing in this file reaches a report
+# unless a retrieved source confirms it.
+
+pack: health
+match: [health, medical, clinical, diagnostic, pathology, hospital, medtech, device, pharma]
+
+topics:
+  digital_pathology:
+    match: [digital pathology, whole slide, computational pathology, pathology ai, ai pathology]
+    keywords: [digital pathology, computational pathology, whole slide imaging, whole slide image, WSI, pathology AI,
+               pathology foundation model, slide scanner, image management]
+    scope_terms: [digital pathology, computational pathology, whole slide, whole-slide, WSI, pathology, pathologist,
+                  histopathology, slide scanner, slide imaging]
+    exclude_terms: [veterinary, radiology AI]
+    sub_segments: [Scanners, Viewers and image management, AI for diagnosis, AI for quality and workflow,
+                   Services and storage]
+    segments:
+      - {id: academic, name: Academic medical centres, terms: [academic, university, teaching hospital, medical centre, medical center]}
+      - {id: community, name: Community hospital labs, terms: [community hospital, regional hospital, small lab, hospital laboratory]}
+      - {id: reference, name: Reference and commercial labs, terms: [reference lab, reference laboratory, commercial lab, laboratory network, lab chain, diagnostic chain]}
+      - {id: pharma, name: Pharma and CROs, terms: [pharma, pharmaceutical, cro, contract research, biomarker, clinical trial, drug development]}
+    stages:
+      - {id: prep, name: Slide preparation, terms: [staining, tissue processing, slide preparation, histology lab]}
+      - {id: scanning, name: Scanning, terms: [scanner, whole slide imaging system, digitis, digitiz]}
+      - {id: viewing, name: Image management and viewing, terms: [image management, viewer, viewing software, display, archive, storage]}
+      - {id: ai, name: AI analysis, terms: [algorithm, artificial intelligence, deep learning, software to assist, ai-based, machine learning]}
+      - {id: reporting, name: Diagnosis and reporting, terms: [sign-out, report, laboratory information system, lis, diagnosis]}
+    opportunities:
+      - {id: qc_ai, name: Quality and workflow AI, terms: [artifact, quality control, triage, workflow, image quality, product code SIX]}
+      - {id: dx_ai, name: AI for primary diagnosis, terms: [diagnosis, cancer detection, prostate, breast, grading, second read, product code QPN]}
+      - {id: ims_mid, name: Image management for mid-size labs, terms: [image management, viewer, viewing software, archive, product code QKQ, product code PZZ]}
+      - {id: india_labs, name: India lab digitisation, terms: [india, indian, cdsco]}
+      - {id: research_lic, name: Research licensing to pharma and CROs, terms: [pharma, biomarker, clinical trial, research use]}
+    fda_product_codes:
+      - {code: PSY, stage: scanning}
+      - {code: QKQ, stage: viewing}
+      - {code: PZZ, stage: viewing}
+      - {code: QPN, stage: ai}
+      - {code: SIX, stage: ai}
+    pubmed_terms: ['"computational pathology"', '"whole slide image" AND "deep learning"']
+    openalex_search: computational pathology whole slide image
+    trials_term: digital pathology artificial intelligence
+    patents: {text: whole slide image, cpc: G06T7/0012}
+    sec_tickers: [{ticker: DHR, company: Danaher}, {ticker: PHG, company: Philips}]
+    gdelt_query: '"digital pathology"'
+    worldbank:
+      - {indicator: SH.XPD.CHEX.PC.CD, unit: USD, topics: ["pestle:economic"]}
+      - {indicator: SP.POP.65UP.TO.ZS, unit: "%", topics: ["pestle:social"]}
+    web_questions_primary:
+      pestle:
+        - "Which regulations govern AI software for digital pathology in the US, EU and India?"
+      market_size:
+        - "How many pathology laboratories and pathologists are there in the US, EU and India?"
+      customers:
+        - "What workforce pressures do pathology laboratories face?"
+      risks:
+        - "Is there reimbursement for digital pathology or AI analysis of pathology slides?"
+    web_questions_secondary:
+      market_size:
+        - "What is the global digital pathology market size and growth rate?"
+      competitors:
+        - "Which digital pathology and AI pathology companies announced partnerships or launches recently?"
+      customers:
+        - "Which laboratory types are adopting digital pathology fastest?"

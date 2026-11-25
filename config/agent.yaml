@@ -1,0 +1,92 @@
+# Agent settings. The Agent settings screen edits the same values; every run saves the
+# merged settings in its manifest. Profiles in config/profiles/ override what they name.
+#
+# Locked in every profile (loading a file that changes them fails):
+#   evidence.model_knowledge: never      the model's own knowledge is never a source
+#   checks include citations, grounding, numbers
+#   run_manifest: true
+
+profile: strict-fact-based
+
+evidence:
+  model_knowledge: never
+  policy: primary_then_secondary_on_request   # primary_only | primary_then_secondary_on_request | primary_then_secondary_for_gaps
+  press_releases_primary: false               # company press releases count as secondary
+  finding_min_facts: 3                        # a key finding needs this many facts ...
+  finding_min_kinds: 2                        # ... from this many kinds of source
+  block_min_facts: 2                          # a framework block with fewer independent facts becomes a gap
+  summary_min_tier: A                         # figures in the executive summary must be tier A
+  flag_after_years: 3
+  exclude_after_years: 10
+
+scope:
+  lock_after_plan: true
+  off_plan_queries: block                     # block | ask | allow
+  out_of_scope: set_aside                     # set_aside | drop
+  steps_per_section: 20
+
+limits:
+  web_searches: 40
+  secondary_searches: 20
+  fetches: 80
+  run_minutes: 30
+  records_per_query: 100
+
+models:
+  planner: claude-opus-5-5        # proposes plan vocabulary (temperature 0)
+  researcher: claude-sonnet-5-5   # runs the web search connectors
+  writer: claude-opus-5-5         # rewrites statements within the cited facts
+  pinned: true
+  temperature_write: 0.2
+  prices_per_mtok: {}            # e.g. {claude-opus-5-5: {input: 0, output: 0}} to see token cost; search fees are always shown
+
+approvals:
+  plan: true
+  secondary_search: true
+  new_companies: true
+  working_range: true
+  review_before_export: false
+
+sources:
+  enabled: {}                    # connector id -> false to switch one off
+  official_domains:              # Claude web search is limited to these during the primary search
+    - fda.gov
+    - accessdata.fda.gov
+    - ema.europa.eu
+    - eur-lex.europa.eu
+    - ec.europa.eu
+    - health.ec.europa.eu
+    - cdsco.gov.in
+    - mohfw.gov.in
+    - sec.gov
+    - worldbank.org
+    - oecd.org
+    - imf.org
+    - who.int
+    - nih.gov
+    - ncbi.nlm.nih.gov
+    - cms.gov
+    - europa.eu
+    - gov.uk
+  blocked_domains: []
+
+output:
+  language: English
+  citation_style: footnotes
+  frameworks:
+    - pestle
+    - market_size
+    - customers
+    - trends
+    - porter
+    - value_chain
+    - competitors
+    - swot
+    - opportunity
+    - bmc
+    - findings
+    - recommendations
+    - risks
+
+checks: [citations, grounding, numbers, scope, policy, gaps, agreement, findings, injection, budget]
+run_manifest: true

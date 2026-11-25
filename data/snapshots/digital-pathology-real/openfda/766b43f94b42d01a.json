@@ -1,0 +1,60 @@
+{
+ "url": "https://api.fda.gov/device/classification.json?search=product_code%3APZZ&limit=100",
+ "fetched": "2026-11-25T07:20:37+00:00",
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 1
+   }
+  },
+  "results": [
+   {
+    "third_party_flag": "Y",
+    "life_sustain_support_flag": "N",
+    "gmp_exempt_flag": "N",
+    "summary_malfunction_reporting": "Ineligible",
+    "product_code": "PZZ",
+    "openfda": {
+     "k_number": [
+      "K242545",
+      "K233119",
+      "K172922"
+     ],
+     "registration_number": [
+      "3003584784",
+      "3008481104",
+      "9613188",
+      "3031232523",
+      "1000181154",
+      "3000237660"
+     ],
+     "fei_number": [
+      "3003584784",
+      "3008481104",
+      "3031232523",
+      "3004455125",
+      "1000181154",
+      "3000237660"
+     ]
+    },
+    "review_panel": "PA",
+    "medical_specialty": "PA",
+    "device_name": "Digital Pathology Display",
+    "review_code": "",
+    "unclassified_reason": "",
+    "medical_specialty_description": "Pathology",
+    "device_class": "2",
+    "definition": "The digital pathology display device is intended for in vitro diagnostic use to display digital images of histopathology slides acquired from FDA-cleared whole-slide imaging scanners that are used for review and interpretation by trained pathologists.",
+    "regulation_number": "864.3700",
+    "implant_flag": "N",
+    "submission_type_id": "1"
+   }
+  ]
+ }
+}

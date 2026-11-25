@@ -1,0 +1,53 @@
+{
+ "run_id": "2026-11-25-fe1025",
+ "checks_passed": 10,
+ "checks": 10,
+ "critic": {
+  "faults": {
+   "number changed": {
+    "seeded": 143,
+    "caught": 143
+   },
+   "citation removed": {
+    "seeded": 224,
+    "caught": 224
+   },
+   "cites a secondary fact": {
+    "seeded": 60,
+    "caught": 60
+   },
+   "instruction injected": {
+    "seeded": 224,
+    "caught": 224
+   },
+   "cites a set-aside fact": {
+    "seeded": 60,
+    "caught": 60
+   },
+   "unsupported claim": {
+    "seeded": 60,
+    "caught": 60
+   },
+   "estimates averaged": {
+    "seeded": 60,
+    "caught": 60
+   }
+  },
+  "originals": 224,
+  "false_alarms": 0,
+  "numbers_checked": 282
+ },
+ "gate": {
+  "planned": 28,
+  "planned_passed": 28,
+  "drift": 22,
+  "drift_blocked": 22
+ },
+ "replay": {
+  "same_evidence": true,
+  "fact_hash": "64882fd2167e7c88",
+  "replay_hash": "64882fd2167e7c88",
+  "same_statements": true,
+  "statements": 224
+ }
+}

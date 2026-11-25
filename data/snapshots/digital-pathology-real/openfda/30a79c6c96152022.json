@@ -1,0 +1,94 @@
+{
+ "url": "https://api.fda.gov/device/classification.json?search=product_code%3APSY&limit=100",
+ "fetched": "2026-11-25T07:20:31+00:00",
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 1
+   }
+  },
+  "results": [
+   {
+    "third_party_flag": "N",
+    "life_sustain_support_flag": "N",
+    "gmp_exempt_flag": "N",
+    "summary_malfunction_reporting": "Eligible",
+    "product_code": "PSY",
+    "openfda": {
+     "k_number": [
+      "K233027",
+      "K251952",
+      "K172174",
+      "K242848",
+      "K230839",
+      "K192259",
+      "K232202",
+      "K253554",
+      "K260964",
+      "K241871",
+      "K232208",
+      "K253606",
+      "K243871",
+      "K232833",
+      "K190332",
+      "K203364",
+      "K242783",
+      "K213883",
+      "K233204",
+      "DEN160056",
+      "K232879",
+      "K241717",
+      "K203845"
+     ],
+     "registration_number": [
+      "3003584784",
+      "3006610913",
+      "2028492",
+      "3017125738",
+      "9613188",
+      "3008491142",
+      "3012563754",
+      "3000126629",
+      "3006791373",
+      "3025774973",
+      "1000181154",
+      "9614683",
+      "3005060446"
+     ],
+     "fei_number": [
+      "3003584784",
+      "3006610913",
+      "1000125183",
+      "3017125738",
+      "3003794634",
+      "3008491142",
+      "3012563754",
+      "3000126629",
+      "3006791373",
+      "3025774973",
+      "3004455125",
+      "1000181154",
+      "3005060446"
+     ]
+    },
+    "review_panel": "PA",
+    "medical_specialty": "PA",
+    "device_name": "Whole Slide Imaging System",
+    "review_code": "",
+    "unclassified_reason": "",
+    "medical_specialty_description": "Pathology",
+    "device_class": "2",
+    "definition": "The whole slide imaging system is an automated digital slide creation, viewing, and management system intended as an aid to the pathologist to review and interpret digital images of surgical pathology slides prepared from formalin-fixed, paraffin-embedded (FFPE) tissue. The system generates digital images that would otherwise be appropriate for manual visualization by conventional brightfield microscopy. The whole slide imaging system is not intended for use with slides prepared from frozen tissue, cytology, and non-FFPE hematopathology specimens (e.g., peripheral blood smear).",
+    "regulation_number": "864.3700",
+    "implant_flag": "N",
+    "submission_type_id": "1"
+   }
+  ]
+ }
+}

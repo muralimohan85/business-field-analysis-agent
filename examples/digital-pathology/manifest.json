@@ -1,0 +1,202 @@
+{
+ "run_id": "2026-11-25-fe1025",
+ "created": "2026-11-25T11:26:17+00:00",
+ "brief_key": "9945b1cac193",
+ "plan_key": "5778530c299c",
+ "profile": "strict-fact-based",
+ "config_hash": "4f2c74740c76",
+ "engine": "deterministic",
+ "evidence_basis": "primary_only",
+ "models": {},
+ "prompt_version": "deterministic",
+ "snapshots": {
+  "openfda": "2026-11-25"
+ },
+ "tool_calls": [
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/classification.json?search=product_code%3APSY&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:31+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/510k.json?search=product_code%3APSY&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:32+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/recall.json?search=product_code%3APSY&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:33+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/classification.json?search=product_code%3AQKQ&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:34+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/510k.json?search=product_code%3AQKQ&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:35+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/recall.json?search=product_code%3AQKQ&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:36+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/classification.json?search=product_code%3APZZ&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:37+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/510k.json?search=product_code%3APZZ&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:38+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/recall.json?search=product_code%3APZZ&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:39+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/classification.json?search=product_code%3AQPN&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:40+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/510k.json?search=product_code%3AQPN&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:42+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/recall.json?search=product_code%3AQPN&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:43+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/classification.json?search=product_code%3ASIX&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:44+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/510k.json?search=product_code%3ASIX&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:45+00:00"
+  },
+  {
+   "connector": "openfda",
+   "url": "https://api.fda.gov/device/recall.json?search=product_code%3ASIX&limit=100",
+   "mode": "replay",
+   "fetched": "2026-11-25T07:20:46+00:00"
+  }
+ ],
+ "blocked_queries": [],
+ "set_aside": [],
+ "checks": [
+  {
+   "rule": 1,
+   "name": "citations",
+   "passed": true,
+   "detail": "all 224 statements cite facts",
+   "count": 0
+  },
+  {
+   "rule": 1,
+   "name": "grounding",
+   "passed": true,
+   "detail": "every remaining statement is supported by its cited facts",
+   "count": 0
+  },
+  {
+   "rule": 2,
+   "name": "numbers",
+   "passed": true,
+   "detail": "282 numbers traced to cited facts or the calculator",
+   "count": 0
+  },
+  {
+   "rule": 10,
+   "name": "scope",
+   "passed": true,
+   "detail": "1 fact(s) set aside, 0 off-plan quer(ies) blocked; none cited",
+   "count": 1
+  },
+  {
+   "rule": 8,
+   "name": "policy",
+   "passed": true,
+   "detail": "basis primary only; 0 secondary fact(s) cited (labelled); 10 fact(s) older than 3 years flagged",
+   "count": 10
+  },
+  {
+   "rule": 4,
+   "name": "gaps",
+   "passed": true,
+   "detail": "29 gap(s) stated in the report and listed as open questions",
+   "count": 29
+  },
+  {
+   "rule": 4,
+   "name": "findings",
+   "passed": true,
+   "detail": "6 finding(s), 2 strong; each meets 3 facts from 2 kinds or is shown as a signal",
+   "count": 6
+  },
+  {
+   "rule": 5,
+   "name": "agreement",
+   "passed": true,
+   "detail": "SWOT, opportunities, recommendations and summary agree",
+   "count": 0
+  },
+  {
+   "rule": 6,
+   "name": "injection",
+   "passed": true,
+   "detail": "1 sentence(s) quarantined from sources; none reached the report",
+   "count": 1
+  },
+  {
+   "rule": 9,
+   "name": "budget",
+   "passed": true,
+   "detail": "web searches 0/40, secondary searches 0/20, fetches 15/80",
+   "count": 0
+  }
+ ],
+ "budget": {
+  "caps": {
+   "web_searches": 40,
+   "secondary_searches": 20,
+   "fetches": 80
+  },
+  "used": {
+   "web_searches": 0,
+   "secondary_searches": 0,
+   "fetches": 15
+  },
+  "records": 0,
+  "tokens": {
+   "input": 0,
+   "output": 0
+  },
+  "search_fees_usd": 0.0,
+  "skipped": []
+ },
+ "fact_hash": "64882fd2167e7c88",
+ "fictional": false
+}

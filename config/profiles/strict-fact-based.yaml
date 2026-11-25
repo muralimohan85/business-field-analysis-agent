@@ -1,0 +1,2 @@
+# Default profile: primary sources only in every report; a secondary search runs only when you ask.
+profile: strict-fact-based

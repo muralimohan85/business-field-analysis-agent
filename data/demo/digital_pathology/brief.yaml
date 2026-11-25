@@ -1,0 +1,18 @@
+# Demo brief: AI-based digital pathology, seen by a mid-size medtech company weighing entry.
+field: "AI-based digital pathology: whole-slide imaging and AI software for diagnosis and lab workflow"
+geography: [Global, US, EU, India]
+horizon_years: 5
+position: new_entrant
+company: Example Diagnostics        # fictional; its sample upload is in uploads/
+competitors: [Paige, Ibex Medical Analytics, Philips]
+questions:
+  - Is there room for a mid-size player in AI for primary diagnosis?
+  - Which regulatory route is fastest in the US and EU?
+pack: health
+topic: digital_pathology
+assumptions:
+  # Your own inputs, labelled as assumptions everywhere they are used. Example values only.
+  - {id: A1, text: "Share of slides digitised by 2031", metric: share_digitised, value: 30, unit: "%", used_in: "Market size: SAM, SOM", confidence: low, test: "Lab survey; scanner sales in filings", if_wrong: "SOM moves in step"}
+  - {id: A2, text: "Share of digitised slides analysed by AI", metric: share_ai, value: 20, unit: "%", used_in: "Market size: SAM, SOM", confidence: low, test: "Usage data from a pilot", if_wrong: "SOM moves in step"}
+  - {id: A3, text: "Price per slide analysed by AI", metric: price_per_slide, value: 5, unit: "USD", used_in: "Market size: SAM", confidence: low, test: "Pricing interviews with labs", if_wrong: "SAM moves in step"}
+  - {id: A4, text: "Reachable share of SAM for a new entrant in five years", metric: reachable_share, value: 3, unit: "%", used_in: "Market size: SOM; Recommendations", confidence: low, test: "Partner pipeline after pilots", if_wrong: "SOM moves in step"}

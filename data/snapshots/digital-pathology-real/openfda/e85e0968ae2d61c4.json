@@ -1,0 +1,8 @@
+{
+ "url": "https://api.fda.gov/device/recall.json?search=product_code%3AQPN&limit=100",
+ "fetched": "2026-11-25T07:20:43+00:00",
+ "body": {
+  "results": [],
+  "_status": 404
+ }
+}

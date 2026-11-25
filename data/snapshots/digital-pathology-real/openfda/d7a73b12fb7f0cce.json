@@ -1,0 +1,48 @@
+{
+ "url": "https://api.fda.gov/device/classification.json?search=product_code%3ASIX&limit=100",
+ "fetched": "2026-11-25T07:20:44+00:00",
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 1
+   }
+  },
+  "results": [
+   {
+    "third_party_flag": "N",
+    "life_sustain_support_flag": "N",
+    "gmp_exempt_flag": "N",
+    "summary_malfunction_reporting": "Ineligible",
+    "product_code": "SIX",
+    "openfda": {
+     "k_number": [
+      "K253561"
+     ],
+     "registration_number": [
+      "3006791373"
+     ],
+     "fei_number": [
+      "3006791373"
+     ]
+    },
+    "review_panel": "PA",
+    "medical_specialty": "PA",
+    "device_name": "Digital Pathology Image Artifact Detection Software Device",
+    "review_code": "",
+    "unclassified_reason": "",
+    "medical_specialty_description": "Pathology",
+    "device_class": "2",
+    "definition": "Digital Pathology Image Artifact Detection Software device is an artificial intelligence-based software intended to identify specific artifacts in scanned digital whole slide images (WSIs) of pathology slides prepared from human samples. It is intended to identify WSIs that should undergo further evaluation for image quality prior to diagnostic review of the images by pathologists.  Device output is not intended for use in diagnosis, prognosis, or prediction of disease.",
+    "regulation_number": "864.3700",
+    "implant_flag": "N",
+    "submission_type_id": "1"
+   }
+  ]
+ }
+}

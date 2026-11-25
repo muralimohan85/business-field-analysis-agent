@@ -1,0 +1,56 @@
+{
+ "url": "https://api.fda.gov/device/510k.json?search=product_code%3ASIX&limit=100",
+ "fetched": "2026-11-25T07:20:45+00:00",
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 1
+   }
+  },
+  "results": [
+   {
+    "third_party_flag": "N",
+    "city": "Vista",
+    "advisory_committee_description": "Pathology",
+    "address_1": "1360 Park Center Dr.",
+    "address_2": "",
+    "statement_or_summary": "Summary",
+    "product_code": "SIX",
+    "openfda": {
+     "device_name": "Digital Pathology Image Artifact Detection Software Device",
+     "medical_specialty_description": "Pathology",
+     "regulation_number": "864.3700",
+     "device_class": "2",
+     "registration_number": [
+      "3006791373"
+     ],
+     "fei_number": [
+      "3006791373"
+     ]
+    },
+    "zip_code": "92081",
+    "applicant": "Leica Biosystems Imaging, Inc.",
+    "decision_date": "2026-08-07",
+    "decision_code": "SESE",
+    "country_code": "US",
+    "device_name": "Aperio iQC DX Software",
+    "advisory_committee": "PA",
+    "contact": "Tamatha  Melton",
+    "expedited_review_flag": "",
+    "k_number": "K253561",
+    "state": "CA",
+    "date_received": "2025-11-17",
+    "review_advisory_committee": "PA",
+    "postal_code": "92081",
+    "decision_description": "Substantially Equivalent",
+    "clearance_type": "Traditional"
+   }
+  ]
+ }
+}

@@ -1,0 +1,36 @@
+# Keyword rules for free text (web passages, news, uploads). They add topics and a direction
+# to a fact. Structured database records set their topics in code instead.
+# The Claude engine classifies text itself; these rules are the deterministic fallback.
+
+topics:
+  pestle:political: [government, ministry, national programme, national program, policy, public funding, tender, procurement rule, mission, subsidy]
+  pestle:economic: [reimbursement, payment, cpt, fee schedule, price, pricing, cost, budget, spend, funding round, revenue, investment]
+  pestle:social: [workforce, shortage, pathologist, ageing, aging, burnout, training, patient, access]
+  pestle:technological: [deep learning, foundation model, artificial intelligence, machine learning, algorithm, scanner, cloud, interoperability, dicom, generative]
+  pestle:legal: [regulation, regulatory, ivdr, mdr, 510(k), de novo, ce mark, clearance, approval, cdsco, data protection, gdpr, liability, guidance]
+  pestle:environmental: [energy, carbon, emissions, storage footprint, sustainability, waste, transport]
+  market:estimate: [market size, market was valued, market is valued, market is expected, market is projected, cagr, compound annual growth]
+  customers:pain: [shortage, backlog, turnaround, delay, burden, workload, error, variability, bottleneck]
+  customers:need: [need, demand, require, faster, consistent, second read, remote, telepathology]
+  customers:criteria: [validation, integration, interoperability, price per, cost per, support, cleared, workflow]
+  channel:partner: [partnership, partners with, partnered, collaboration, alliance, integrate with, distribution agreement]
+  channel:marketplace: [marketplace, app store, platform partners, ecosystem of apps]
+  channel:distributor: [distributor, reseller, channel partner]
+  competitor:move: [launch, launches, acquires, acquisition, raises, funding round, partnership, clearance, cleared, approval, expands]
+  porter:buyers: [hospital, health system, reference lab, laboratory network, procurement, tender, group purchasing]
+  porter:suppliers: [scanner, storage, cloud provider, gpu, compute]
+  porter:substitutes: [manual review, microscope, glass slide, conventional]
+  porter:entrants: [startup, new entrant, 510(k), de novo, clearance]
+  porter:rivalry: [competitor, competition, rival, market leader, market share]
+  capability: [our team, our platform, our product, our software, our sales, our cloud, we have, we lack, we do not have, our partners, our validation]
+  risk: [recall, warning, lawsuit, breach, delay, shortage, uncertain, risk, failure, cybersecurity]
+  bmc:revenue: [subscription, per slide, per case, licence, license, pay-per-use, revenue share]
+  bmc:partners: [partnership, alliance, collaboration]
+  bmc:channels: [distributor, marketplace, direct sales]
+  bmc:costs: [cost, storage, compute, validation study]
+
+direction:
+  tailwind: [growth, grow, rising, increase, increases, expand, expands, cleared, clearance, granted, approval, adopt, adoption, funding, launch, improve, faster, shortage of pathologists]
+  headwind: [recall, we lack, we do not have, higher than our target, decline, delay, delayed, barrier, uncertain, lack of reimbursement, no reimbursement, cost, costly, shortage of data, breach, lawsuit, restriction]
+
+# segments, value-chain stages and opportunities are defined per topic in config/packs/

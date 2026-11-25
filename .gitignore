@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.venv/
+.env
+# runs, evidence stores, uploads and exports: may hold private material
+workspace/
+data/uploads/
+*.db
+examples/**/charts/

@@ -1,0 +1,160 @@
+{
+ "url": "https://api.fda.gov/device/510k.json?search=product_code%3APZZ&limit=100",
+ "fetched": "2026-11-25T07:20:38+00:00",
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 3
+   }
+  },
+  "results": [
+   {
+    "third_party_flag": "N",
+    "city": "Hakusan",
+    "advisory_committee_description": "Pathology",
+    "address_1": "153 Shimokashiwano",
+    "address_2": "",
+    "statement_or_summary": "Summary",
+    "product_code": "PZZ",
+    "openfda": {
+     "registration_number": [
+      "3003584784",
+      "3008481104",
+      "9613188",
+      "3031232523",
+      "1000181154",
+      "3000237660"
+     ],
+     "fei_number": [
+      "3003584784",
+      "3008481104",
+      "3031232523",
+      "3004455125",
+      "1000181154",
+      "3000237660"
+     ],
+     "device_name": "Digital Pathology Display",
+     "medical_specialty_description": "Pathology",
+     "regulation_number": "864.3700",
+     "device_class": "2"
+    },
+    "zip_code": "924-8566",
+    "applicant": "Eizo Corporation",
+    "decision_date": "2025-05-23",
+    "decision_code": "SESE",
+    "country_code": "JP",
+    "device_name": "RadiForce MX317W-PA",
+    "advisory_committee": "PA",
+    "contact": "Hiroaki  Hashimoto",
+    "expedited_review_flag": "",
+    "k_number": "K242545",
+    "state": "",
+    "date_received": "2024-08-27",
+    "review_advisory_committee": "PA",
+    "postal_code": "924-8566",
+    "decision_description": "Substantially Equivalent",
+    "clearance_type": "Abbreviated"
+   },
+   {
+    "third_party_flag": "N",
+    "city": "Shenzhen",
+    "advisory_committee_description": "Pathology",
+    "address_1": "15f, Bldg. 6, Hengda Shishang Huigu(East),",
+    "address_2": "Fulong Rd., Dalang Subdistrict, Longhua",
+    "statement_or_summary": "Summary",
+    "product_code": "PZZ",
+    "openfda": {
+     "registration_number": [
+      "3003584784",
+      "3008481104",
+      "9613188",
+      "3031232523",
+      "1000181154",
+      "3000237660"
+     ],
+     "fei_number": [
+      "3003584784",
+      "3008481104",
+      "3031232523",
+      "3004455125",
+      "1000181154",
+      "3000237660"
+     ],
+     "device_name": "Digital Pathology Display",
+     "medical_specialty_description": "Pathology",
+     "regulation_number": "864.3700",
+     "device_class": "2"
+    },
+    "zip_code": "518109",
+    "applicant": "Shenzhen Beacon Display Technology Co., Ltd.",
+    "decision_date": "2024-12-28",
+    "decision_code": "SESE",
+    "country_code": "CN",
+    "device_name": "8MP Color LCD Displays C811W, C811WT, PA27 and PA27T",
+    "advisory_committee": "PA",
+    "contact": "Li  Yafei",
+    "expedited_review_flag": "",
+    "k_number": "K233119",
+    "state": "",
+    "date_received": "2023-09-27",
+    "review_advisory_committee": "PA",
+    "postal_code": "518109",
+    "decision_description": "Substantially Equivalent",
+    "clearance_type": "Traditional"
+   },
+   {
+    "third_party_flag": "N",
+    "city": "Kortrijk",
+    "advisory_committee_description": "Pathology",
+    "address_1": "President Kennedypark 35",
+    "address_2": "",
+    "statement_or_summary": "Summary",
+    "product_code": "PZZ",
+    "openfda": {
+     "registration_number": [
+      "3003584784",
+      "3008481104",
+      "9613188",
+      "3031232523",
+      "1000181154",
+      "3000237660"
+     ],
+     "fei_number": [
+      "3003584784",
+      "3008481104",
+      "3031232523",
+      "3004455125",
+      "1000181154",
+      "3000237660"
+     ],
+     "device_name": "Digital Pathology Display",
+     "medical_specialty_description": "Pathology",
+     "regulation_number": "864.3700",
+     "device_class": "2"
+    },
+    "zip_code": "8500",
+    "applicant": "Barco N.V.",
+    "decision_date": "2017-12-21",
+    "decision_code": "SESE",
+    "country_code": "BE",
+    "device_name": "MMPC-4127F1",
+    "advisory_committee": "PA",
+    "contact": "Lieven  De Wandel",
+    "expedited_review_flag": "",
+    "k_number": "K172922",
+    "state": "",
+    "date_received": "2017-09-25",
+    "review_advisory_committee": "PA",
+    "postal_code": "8500",
+    "decision_description": "Substantially Equivalent",
+    "clearance_type": "Traditional"
+   }
+  ]
+ }
+}

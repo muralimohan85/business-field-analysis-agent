@@ -1,0 +1,84 @@
+# The framework catalogue: what each one answers and which connectors its plan questions use.
+# {field} and {geo} are filled from the brief. Add a framework here and a builder in bfa/frameworks/.
+
+frameworks:
+  pestle:
+    title: PESTLE
+    default: true
+    question: "Which political, economic, social, technological, legal and environmental forces push {field} up or down in {geo}?"
+    connectors: [worldbank, pubmed, openfda, claude_web]
+  market_size:
+    title: Market size and growth
+    default: true
+    question: "How big is {field} in {geo}, how fast is it growing, and which segments and regions hold the value?"
+    connectors: [sec_edgar, worldbank, claude_web]
+  customers:
+    title: Customer segments and needs
+    default: true
+    question: "Who buys {field}, how many buyers are there, what do they need and how do they decide?"
+    connectors: [claude_web, clinicaltrials]
+  trends:
+    title: Trends and signals
+    default: true
+    question: "Are papers, patents, trials and regulatory decisions on {field} accelerating?"
+    connectors: [pubmed, openalex, patentsview, clinicaltrials, openfda]
+  porter:
+    title: Porter's Five Forces
+    default: true
+    question: "How hard is it to make money in {field}: entrants, buyers, suppliers, substitutes, rivalry?"
+    connectors: [openfda, sec_edgar, claude_web]
+  value_chain:
+    title: Value chain and channels
+    default: true
+    question: "Where is value created and captured in {field}, who sits at each stage, and which routes reach the buyer?"
+    connectors: [openfda, claude_web]
+  competitors:
+    title: Competitor analysis
+    default: true
+    question: "Who competes in {field}, on what, and how are they moving?"
+    connectors: [openfda, sec_edgar, patentsview, clinicaltrials]
+  swot:
+    title: SWOT
+    default: true
+    question: "What are the strengths, weaknesses, opportunities and threats for the subject in {field}?"
+    connectors: []
+  opportunity:
+    title: Opportunity landscape
+    default: true
+    question: "Which openings in {field} are attractive, and where can the subject win?"
+    connectors: []
+  bmc:
+    title: Business model canvas
+    default: true
+    question: "How would a winning business model in {field} work?"
+    connectors: [claude_web]
+  findings:
+    title: Key findings and patterns
+    default: true
+    question: "What patterns appear across sources on {field}?"
+    connectors: []
+  recommendations:
+    title: Recommendations and next steps
+    default: true
+    question: "What should the subject do in {field}, and what first?"
+    connectors: []
+  risks:
+    title: Risks and assumptions
+    default: true
+    question: "What could go wrong in {field}, and what is the analysis taking on trust?"
+    connectors: [openfda, claude_web]
+  regulatory:
+    title: Regulatory landscape
+    default: false
+    question: "Which approvals and rules gate entry to {field} in {geo}?"
+    connectors: [openfda, claude_web]
+  technology:
+    title: Technology readiness
+    default: false
+    question: "How mature are the key technologies in {field}?"
+    connectors: [pubmed, patentsview, clinicaltrials]
+  scenarios:
+    title: Scenarios
+    default: false
+    question: "How could {field} look in {horizon} years under different uncertainties?"
+    connectors: []

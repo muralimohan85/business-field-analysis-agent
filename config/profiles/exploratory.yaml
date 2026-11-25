@@ -1,0 +1,9 @@
+# Exploratory: still primary first, but a capped secondary search fills gaps automatically.
+# Secondary facts stay labelled and can be excluded from the report and exports.
+evidence:
+  policy: primary_then_secondary_for_gaps
+scope:
+  off_plan_queries: ask
+limits:
+  web_searches: 60
+  secondary_searches: 30

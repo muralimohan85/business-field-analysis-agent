@@ -1,0 +1,10 @@
+# Regulated health: primary only, fresher evidence, stronger patterns, review before export.
+evidence:
+  policy: primary_only
+  finding_min_facts: 4
+  flag_after_years: 2
+approvals:
+  review_before_export: true
+output:
+  frameworks: [pestle, market_size, customers, trends, porter, value_chain, competitors, swot, opportunity,
+               bmc, findings, recommendations, risks, regulatory]

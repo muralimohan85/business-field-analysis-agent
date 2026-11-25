@@ -1,0 +1,97 @@
+{
+ "url": "https://api.fda.gov/device/510k.json?search=product_code%3AQPN&limit=100",
+ "fetched": "2026-11-25T07:20:42+00:00",
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16",
+   "results": {
+    "skip": 0,
+    "limit": 100,
+    "total": 2
+   }
+  },
+  "results": [
+   {
+    "third_party_flag": "N",
+    "city": "Tel Aviv",
+    "advisory_committee_description": "Pathology",
+    "address_1": "101 Rokach Blvd.",
+    "address_2": "",
+    "statement_or_summary": "Summary",
+    "product_code": "QPN",
+    "openfda": {
+     "registration_number": [
+      "3017125738",
+      "3029787717"
+     ],
+     "fei_number": [
+      "3017125738",
+      "3029787717"
+     ],
+     "device_name": "Software Algorithm Device To Assist Users In Digital Pathology",
+     "medical_specialty_description": "Pathology",
+     "regulation_number": "864.3750",
+     "device_class": "2"
+    },
+    "zip_code": "6153101",
+    "applicant": "Ibex Medical Analytics , Ltd.",
+    "decision_date": "2025-01-24",
+    "decision_code": "SESE",
+    "country_code": "IL",
+    "device_name": "Galen\u0099 Second Read\u0099",
+    "advisory_committee": "PA",
+    "contact": "Yael  Liebes Peer",
+    "expedited_review_flag": "",
+    "k_number": "K241232",
+    "state": "",
+    "date_received": "2024-05-02",
+    "review_advisory_committee": "PA",
+    "postal_code": "6153101",
+    "decision_description": "Substantially Equivalent",
+    "clearance_type": "Traditional"
+   },
+   {
+    "third_party_flag": "N",
+    "city": "New York",
+    "advisory_committee_description": "Pathology",
+    "address_1": "11 Times Sq. 37th Floor",
+    "address_2": "",
+    "statement_or_summary": "",
+    "product_code": "QPN",
+    "openfda": {
+     "registration_number": [
+      "3017125738",
+      "3029787717"
+     ],
+     "fei_number": [
+      "3017125738",
+      "3029787717"
+     ],
+     "device_name": "Software Algorithm Device To Assist Users In Digital Pathology",
+     "medical_specialty_description": "Pathology",
+     "regulation_number": "864.3750",
+     "device_class": "2"
+    },
+    "zip_code": "10036",
+    "applicant": "Paige.Ai",
+    "decision_date": "2021-09-21",
+    "decision_code": "DENG",
+    "country_code": "US",
+    "device_name": "Paige Prostate",
+    "advisory_committee": "PA",
+    "contact": "Emre  Gulturk",
+    "expedited_review_flag": "",
+    "k_number": "DEN200080",
+    "state": "NY",
+    "date_received": "2020-12-31",
+    "review_advisory_committee": "PA",
+    "postal_code": "10036",
+    "decision_description": "Unknown",
+    "clearance_type": "Direct"
+   }
+  ]
+ }
+}

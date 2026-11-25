@@ -1,0 +1,28 @@
+# The source catalogue. "implemented" connectors run today; "planned" ones are on the
+# roadmap and listed so the settings screen shows the full picture. basis is fixed per
+# connector, except Claude web search, which is primary only on official domains.
+
+connectors:
+  openfda:        {name: openFDA, basis: primary, tier: A, kind: regulator, key: OPENFDA_API_KEY, key_required: false, status: implemented}
+  clinicaltrials: {name: ClinicalTrials.gov, basis: primary, tier: A, kind: trial, key: "", key_required: false, status: implemented}
+  pubmed:         {name: PubMed, basis: primary, tier: A, kind: paper, key: NCBI_API_KEY, key_required: false, status: implemented}
+  openalex:       {name: OpenAlex, basis: primary, tier: A, kind: paper, key: OPENALEX_API_KEY, key_required: true, status: implemented}
+  worldbank:      {name: World Bank Indicators, basis: primary, tier: A, kind: statistics, key: "", key_required: false, status: implemented}
+  sec_edgar:      {name: SEC EDGAR, basis: primary, tier: A, kind: filing, key: "", key_required: false, status: implemented}
+  patentsview:    {name: PatentsView, basis: primary, tier: A, kind: patent, key: PATENTSVIEW_API_KEY, key_required: true, status: implemented}
+  claude_web:     {name: Claude web search (official domains), basis: primary, tier: A, kind: web, key: ANTHROPIC_API_KEY, key_required: true, status: implemented}
+  gdelt:          {name: GDELT news, basis: secondary, tier: B, kind: news, key: "", key_required: false, status: implemented}
+  claude_web_open: {name: Claude web search (wider web), basis: secondary, tier: B, kind: web, key: ANTHROPIC_API_KEY, key_required: true, status: implemented}
+  uploads:        {name: Your documents, basis: by upload, tier: U, kind: upload, key: "", key_required: false, status: implemented}
+  imf:            {name: IMF Data, basis: primary, tier: A, kind: statistics, key: "", key_required: false, status: planned}
+  oecd:           {name: OECD Data, basis: primary, tier: A, kind: statistics, key: "", key_required: false, status: planned}
+  eurostat:       {name: Eurostat, basis: primary, tier: A, kind: statistics, key: "", key_required: false, status: planned}
+  comtrade:       {name: UN Comtrade, basis: primary, tier: A, kind: statistics, key: COMTRADE_API_KEY, key_required: true, status: planned}
+  gleif:          {name: GLEIF, basis: primary, tier: A, kind: filing, key: "", key_required: false, status: planned}
+  semanticscholar: {name: Semantic Scholar, basis: primary, tier: A, kind: paper, key: S2_API_KEY, key_required: false, status: planned}
+  europepmc:      {name: Europe PMC, basis: primary, tier: A, kind: paper, key: "", key_required: false, status: planned}
+  arxiv:          {name: arXiv, basis: primary, tier: A, kind: paper, key: "", key_required: false, status: planned}
+  crossref:       {name: Crossref, basis: primary, tier: A, kind: paper, key: "", key_required: false, status: planned}
+  epo_ops:        {name: EPO Open Patent Services, basis: primary, tier: A, kind: patent, key: EPO_OPS_KEY, key_required: true, status: planned}
+  wikidata:       {name: Wikidata, basis: secondary, tier: B, kind: company, key: "", key_required: false, status: planned}
+  newsrooms:      {name: Company newsrooms (RSS), basis: secondary, tier: B, kind: company, key: "", key_required: false, status: planned}
